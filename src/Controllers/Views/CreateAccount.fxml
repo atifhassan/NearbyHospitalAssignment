@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.collections.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.collections.FXCollections?>
+
+<GridPane fx:id="GridPane" vgap="5" maxWidth="Infinity" prefHeight="550.0" prefWidth="350.0" 
+          xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" 
+          fx:controller="Controllers.CreateAccountController" alignment="CENTER" >
+    <columnConstraints>
+        <ColumnConstraints />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+    </rowConstraints>
+    <children>
+        <!-- First and Last Name -->
+        <HBox GridPane.fillWidth="false" GridPane.halignment="LEFT" >      
+            <children>
+                <GridPane>
+                    <columnConstraints>
+                        <ColumnConstraints />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints/> 
+                        <RowConstraints/> 
+                    </rowConstraints>
+                    <children>
+                        <Label text="Name: " textFill="DARKGRAY" underline="true" />
+                        <HBox GridPane.rowIndex="1" spacing="5" GridPane.halignment="CENTER" GridPane.fillWidth="false">
+                            <children>
+                                <TextField fx:id="fNameField" promptText="First" />
+                                <TextField fx:id="lNameField" promptText="Last"/>
+                            </children>
+                        </HBox>
+                    </children>
+                </GridPane>
+            </children>
+        </HBox>
+        <!--Date of Birth -->
+        <HBox GridPane.fillWidth="false" GridPane.rowIndex="1" GridPane.halignment="LEFT">
+            <children>
+                <GridPane>
+                    <columnConstraints>
+                        <ColumnConstraints />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints/> 
+                        <RowConstraints/> 
+                    </rowConstraints>
+                    <children>
+                        <Label text="Date of Birth: "  textFill="DARKGRAY" underline="true" />
+                        <HBox GridPane.rowIndex="1">
+                            <children>
+                                <DatePicker fx:id="dobPicker"/>
+                            </children>
+                        </HBox>
+                    </children>
+                </GridPane>
+            </children>
+        </HBox>
+        <!-- Gender -->
+        <HBox GridPane.fillWidth="false" GridPane.rowIndex="2" GridPane.halignment="LEFT">
+            <children>
+                <GridPane>
+                    <columnConstraints>
+                        <ColumnConstraints />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints/> 
+                        <RowConstraints/> 
+                    </rowConstraints>
+                    <children>
+                        <Label text="Gender: "  textFill="DARKGRAY" underline="true" />
+                        <HBox GridPane.rowIndex="1">
+                            <children>
+                                <ChoiceBox fx:id="genderBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" >
+                                    <items>
+                                        <FXCollections fx:factory="observableArrayList">
+                                            <String fx:value="Male" />
+                                            <String fx:value="Female" />
+                                            <String fx:value="Other" />
+                                        </FXCollections>
+                                    </items>
+                                    <value>
+                                        <String fx:value="-" />
+                                    </value>      
+                                </ChoiceBox>
+                            </children>
+                        </HBox>
+                    </children>
+                </GridPane>
+            </children>
+        </HBox>
+        <!-- Username -->
+        <HBox GridPane.fillWidth="false" GridPane.rowIndex="3" GridPane.halignment="LEFT">
+            <children>
+                <GridPane>
+                    <columnConstraints>
+                        <ColumnConstraints />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints/> 
+                        <RowConstraints/> 
+                    </rowConstraints>
+                    <children>
+                        <Label text="Username: "  textFill="DARKGRAY" underline="true" />
+                        <HBox GridPane.rowIndex="1" spacing="5" alignment="BASELINE_LEFT">
+                            <children>
+                                <TextField fx:id="userNameField"/>
+                                <Label fx:id="userNameLabel" textFill="#0067f8"/> 
+                            </children>
+                        </HBox>
+                    </children>
+                </GridPane>
+            </children>
+        </HBox>
+        <!-- Email -->
+        <HBox GridPane.fillWidth="false" GridPane.rowIndex="4" GridPane.halignment="LEFT">
+            <children>
+                <GridPane>
+                    <columnConstraints>
+                        <ColumnConstraints />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints/> 
+                        <RowConstraints/> 
+                    </rowConstraints>
+                    <children>
+                        <Label text="Email: "  textFill="DARKGRAY" underline="true" />
+                        <HBox GridPane.rowIndex="1" spacing="5" alignment="BASELINE_LEFT" >
+                            <children>
+                                <TextField fx:id="emailField" promptText="xxxx@mail.xxx" />
+                                <Label fx:id="emailLabel" textFill="#0067f8"/> 
+                            </children>
+                        </HBox>
+                    </children>
+                </GridPane>
+            </children>
+        </HBox>
+        <!-- Phone Number -->
+        <HBox GridPane.fillWidth="false" GridPane.rowIndex="5" GridPane.halignment="LEFT">
+            <children>
+                <GridPane>
+                    <columnConstraints>
+                        <ColumnConstraints />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints/> 
+                        <RowConstraints/> 
+                    </rowConstraints>
+                    <children>
+                        <Label text="Phone Number: "  textFill="DARKGRAY" underline="true" />
+                        <HBox GridPane.rowIndex="1" spacing="5" alignment="BASELINE_LEFT" >
+                            <children>
+                                <TextField fx:id="phoneField" promptText="##########" />
+                                <Label fx:id="phoneLabel" textFill="#0067f8"/> 
+                            </children>
+                        </HBox>
+                    </children>
+                </GridPane>
+            </children>
+        </HBox>
+        <!-- SSN -->
+        <HBox GridPane.fillWidth="false" GridPane.rowIndex="6" GridPane.halignment="LEFT">
+            <children>
+                <GridPane>
+                    <columnConstraints>
+                        <ColumnConstraints />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints/> 
+                        <RowConstraints/> 
+                    </rowConstraints>
+                    <children>
+                        <Label text="SSN: "  textFill="DARKGRAY" underline="true" />
+                        <HBox GridPane.rowIndex="1" spacing="5" alignment="BASELINE_LEFT" >
+                            <children>
+                                <TextField fx:id="ssnField" promptText="#########" />
+                                <Label fx:id="ssnLabel" textFill="#0067f8"/> 
+                            </children>
+                        </HBox>
+                    </children>
+                </GridPane>
+            </children>
+        </HBox>
+        <!-- Profile Photo -->
+        <HBox GridPane.fillWidth="false" GridPane.rowIndex="7" GridPane.halignment="LEFT">
+            <children>
+                <GridPane>
+                    <columnConstraints>
+                        <ColumnConstraints/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints/> 
+                        <RowConstraints/> 
+                    </rowConstraints>
+                    <children>
+                        <Label text="Profile Photo:"  textFill="DARKGRAY" underline="true" />
+                        <HBox GridPane.rowIndex="1" spacing="-5" >
+                            <children>
+                                <TextField fx:id="photoField" editable="false"/>
+                                <Button fx:id="openDialog" onAction="#fileChoose" text="Browse"/>
+                            </children>
+                        </HBox>
+                    </children>
+                </GridPane>
+            </children>
+        </HBox>
+        <!-- Password 1 -->
+        <HBox GridPane.fillWidth="false" GridPane.rowIndex="8" GridPane.halignment="LEFT">
+            <children>
+                <GridPane>
+                    <columnConstraints>
+                        <ColumnConstraints />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints/> 
+                        <RowConstraints/> 
+                    </rowConstraints>
+                    <children>
+                        
+                        <Label text="Password: "  textFill="DARKGRAY" underline="true" />
+                            
+                        <HBox GridPane.rowIndex="1" alignment="CENTER" spacing="5" >
+                            <children>
+                                <PasswordField fx:id="pwordField" maxWidth="Infinity"  />
+                                <Label fx:id="pw1Label" textFill="#0067f8"/> 
+                            </children>
+                        </HBox>
+                    </children>
+                </GridPane>
+            </children>
+        </HBox>
+        <!-- Password 2 -->
+        <HBox GridPane.fillWidth="false" GridPane.rowIndex="9" GridPane.halignment="LEFT">
+            <children>
+                <GridPane>
+                    <columnConstraints>
+                        <ColumnConstraints />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints/> 
+                        <RowConstraints/> 
+                    </rowConstraints>
+                    <children>
+                        <Label text="Re-Enter Password: "  textFill="DARKGRAY" underline="true" />
+                        <HBox GridPane.rowIndex="1" spacing="5" alignment="CENTER" >
+                            <children>
+                                <PasswordField fx:id="pword2Field"/>
+                                <Label fx:id="pw2Label" textFill="#0067f8" /> 
+                            </children>
+                        </HBox>
+                    </children>
+                </GridPane>
+            </children>
+        </HBox>
+        <!-- Buttons -->
+        <HBox GridPane.rowIndex="10" GridPane.halignment="RIGHT" spacing="5" GridPane.fillWidth="false" alignment="CENTER" >
+            <children>
+                <Label fx:id="fillLabel" textFill="#0067f8" />  
+                <Button fx:id="cancel" onAction="#cancelAccountBut" text="Back" />
+                <Button fx:id="registerBut" onAction="#createAccountBut" text="Done" />
+            </children>
+        </HBox>          
+    </children>
+</GridPane>

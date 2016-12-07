@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<SplitPane dividerPositions="0.1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.HospitalListController">
+  <items>
+      <HBox>
+         <children>
+            <Button mnemonicParsing="false" text="Log Out" fx:id="logoutButton" onAction="#LogOut"/>
+                  <TextField fx:id="searchBox" alignment="CENTER" maxHeight="Infinity" maxWidth="Infinity" onKeyReleased="#handleEnterPressed" prefWidth="670.0" text="Search Zip Code" />
+            <Button mnemonicParsing="false" text="Search" fx:id="searchButton" onAction="#search"/>
+         </children>
+      </HBox>
+    <AnchorPane minHeight="0.0" minWidth="0.0">
+         <children>
+            <TableView fx:id="HospitalTable" editable="true" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="800.0" >
+              <columns>
+                <TableColumn fx:id="nameCol" editable="false" prefWidth="160.0" text="Name" />
+                <TableColumn fx:id="addressCol" editable="false" prefWidth="130.0" text="Address" />
+                <TableColumn fx:id="cityCol" editable="false" prefWidth="100.0" text="City" />
+                <TableColumn fx:id="stateCol" editable="false" prefWidth="25.0" text="State" />
+                <TableColumn fx:id="zipCol" editable="false" prefWidth="60.0" text="Zip Code" />
+                <TableColumn fx:id="latCol" editable="false" prefWidth="70.0" text="Latitude" />
+                <TableColumn fx:id="longCol" editable="false" prefWidth="70.0" text="Longitude" />
+                <TableColumn fx:id="phoneCol" editable="false" prefWidth="85.0" text="Phone Number" />
+                <TableColumn fx:id="imageCol" editable="false" prefWidth="100.0" text="Image" />
+              </columns>
+            </TableView>
+         </children></AnchorPane>
+  </items>
+</SplitPane>
