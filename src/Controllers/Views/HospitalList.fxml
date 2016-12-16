@@ -7,30 +7,56 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<SplitPane dividerPositions="0.1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.HospitalListController">
-  <items>
-      <HBox>
-         <children>
-            <Button mnemonicParsing="false" text="Log Out" fx:id="logoutButton" onAction="#LogOut"/>
-                  <TextField fx:id="searchBox" alignment="CENTER" maxHeight="Infinity" maxWidth="Infinity" onKeyReleased="#handleEnterPressed" prefWidth="670.0" text="Search Zip Code" />
-            <Button mnemonicParsing="false" text="Search" fx:id="searchButton" onAction="#search"/>
-         </children>
-      </HBox>
-    <AnchorPane minHeight="0.0" minWidth="0.0">
-         <children>
-            <TableView fx:id="HospitalTable" editable="true" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="800.0" >
-              <columns>
-                <TableColumn fx:id="nameCol" editable="false" prefWidth="160.0" text="Name" />
-                <TableColumn fx:id="addressCol" editable="false" prefWidth="130.0" text="Address" />
-                <TableColumn fx:id="cityCol" editable="false" prefWidth="100.0" text="City" />
-                <TableColumn fx:id="stateCol" editable="false" prefWidth="25.0" text="State" />
-                <TableColumn fx:id="zipCol" editable="false" prefWidth="60.0" text="Zip Code" />
-                <TableColumn fx:id="latCol" editable="false" prefWidth="70.0" text="Latitude" />
-                <TableColumn fx:id="longCol" editable="false" prefWidth="70.0" text="Longitude" />
-                <TableColumn fx:id="phoneCol" editable="false" prefWidth="85.0" text="Phone Number" />
-                <TableColumn fx:id="imageCol" editable="false" prefWidth="100.0" text="Image" />
-              </columns>
-            </TableView>
-         </children></AnchorPane>
-  </items>
+<SplitPane dividerPositions="0.2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="800.0" prefWidth="1500.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.HospitalListController">
+    <items>
+        <GridPane alignment="CENTER">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints />
+            <RowConstraints />
+            </rowConstraints>
+            <children>
+                <HBox alignment="CENTER" spacing="5" GridPane.rowIndex="0">
+                    <children>
+                        <TextField fx:id="latBox" alignment="CENTER" promptText="Latitude" />
+                        <TextField fx:id="longBox" alignment="CENTER" promptText="Longitude" />
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" spacing="5" GridPane.rowIndex="1">
+                   <children> 
+                       <Button fx:id="logoutButton" mnemonicParsing="false" onAction="#LogOut" text="Log Out" />
+                       <Button fx:id="locateButton" mnemonicParsing="false" onAction="#Locate" text="Locate Me" />
+                       <Button fx:id="searchButton" mnemonicParsing="false" onAction="#search" text="Search" />
+                   </children>
+                </HBox>
+                <HBox alignment="CENTER" spacing="5" GridPane.rowIndex="2">
+                    <children>
+                        <Label alignment="TOP_CENTER" text="Set Search Radius:" />
+                        <Slider fx:id="radius" max="100" min="10" minorTickCount="5" onValueChange="#hospitalResults" prefWidth="1000.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+                    </children>
+                </HBox>
+            </children>
+        </GridPane>
+        <AnchorPane minHeight="0.0" minWidth="0.0" SplitPane.resizableWithParent="true">
+            <children>
+                <TableView fx:id="HospitalTable" editable="true" maxHeight="Infinity" maxWidth="Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#hospitalSelect" prefHeight="600" prefWidth="1500" stylesheets="@../style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                        <TableColumn fx:id="nameCol" editable="false" prefWidth="300.0" text="Name" />
+                        <TableColumn fx:id="addressCol" editable="false" prefWidth="140.0" text="Address" />
+                        <TableColumn fx:id="cityCol" editable="false" prefWidth="100.0" text="City" />
+                        <TableColumn fx:id="stateCol" editable="false" prefWidth="50.0" text="State" />
+                        <TableColumn fx:id="zipCol" editable="false" prefWidth="60.0" text="Zip Code" />
+                        <TableColumn fx:id="latCol" editable="false" prefWidth="70.0" text="Latitude" />
+                        <TableColumn fx:id="longCol" editable="false" prefWidth="70.0" text="Longitude" />
+                        <TableColumn fx:id="disCol" editable="false" prefWidth="70.0" text="Distance" />
+                        <TableColumn fx:id="phoneCol" editable="false" prefWidth="85.0" text="Phone #" />
+                        <TableColumn fx:id="imageCol" editable="false" prefWidth="300.0" text="Image" />
+                    </columns>
+                </TableView>
+            </children>
+        </AnchorPane>
+    </items>
 </SplitPane>

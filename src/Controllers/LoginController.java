@@ -18,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
 /**
@@ -38,8 +39,15 @@ public class LoginController implements Initializable {
     private String password;
     private UserList list = new UserList("databases/userList.dat");
     
+    /**
+     * 
+     * @param event
+     * @throws EmptyException
+     * @throws FullException
+     * @throws Exception 
+     */
     @FXML
-    private void handleLoginButton(ActionEvent event) throws EmptyException, FullException, Exception {
+    private void handleLoginButton() throws EmptyException, FullException, Exception {
         //reset error label
         loginLabel.setText("");
 
@@ -59,9 +67,32 @@ public class LoginController implements Initializable {
             loginLabel.setText("Username Invalid");
         }
     }
-    
+        /**
+     *
+     * @param event
+     */
     @FXML
-    //changes scene to create account
+    private void handleEnterPressed() {
+        passField.getParent().setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                try {
+                    handleLoginButton();
+                } catch (FullException ex) {
+                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (Exception ex) {
+                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+    }
+    /**
+     *
+     */
+    /**
+     * changes scene to create account
+     * @param event 
+     */
+    @FXML
     private void handleCreateButton(ActionEvent event) {
         changeWindow("Views/CreateAccount.fxml", "Create Account");
     }

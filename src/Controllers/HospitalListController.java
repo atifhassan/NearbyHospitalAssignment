@@ -6,11 +6,12 @@
 package Controllers;
 
 import Exceptions.EmptyException;
-import Exceptions.NullElementException;
 import classes.Hospital;
+import classes.Location;
 import classes.ReadHospitalList;
-import java.awt.event.KeyEvent;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -24,6 +25,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -31,6 +33,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import structures.BinarySearchTree;
+import structures.Heap;
 
 /**
  * FXML Controller class
@@ -59,15 +62,24 @@ public class HospitalListController implements Initializable {
     @FXML
     private TableColumn longCol;
     @FXML
+    private TableColumn disCol;
+    @FXML
     private TableColumn phoneCol;
     @FXML
     private TableColumn imageCol;
     @FXML
-    private TextField searchBox;
+    private TextField latBox;
+    @FXML
+    private TextField longBox;
     @FXML
     private Button logoutButton;
     @FXML
     private Button searchButton;
+    @FXML
+    private Slider radius;
+    private double lat;
+    private double lon;
+    private Heap<Hospital> heap;
 
     /**
      * Initializes the controller class.
@@ -83,52 +95,105 @@ public class HospitalListController implements Initializable {
 
     /**
      *
-     * @param event
+     * @throws EmptyException
      */
     @FXML
-    private void handleEnterPressed() {
-        searchBox.getParent().setOnKeyPressed(event -> {
+    private void search() throws EmptyException {
+        if (searchButton.getText().equals("Search")) {
+            latBox.editableProperty().set(false);
+            longBox.editableProperty().set(false);
+            searchButton.setText("New Search");
+            hospitalResults();
+        } else {
+            searchButton.setText("Search");
+            latBox.editableProperty().set(true);
+            latBox.setPromptText("Latitude");
+            longBox.editableProperty().set(true);
+            longBox.setPromptText("Longitude");
+            populateList(hospitalData);
+        }
+    }
+
+    /**
+     *
+     */
+    @FXML
+    private void hospitalSelect() {
+        HospitalTable.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
-                hospitalResults();
-                searchBox.editableProperty().set(false);
-                searchButton.setText("New Search");
+                Hospital data = HospitalTable.getSelectionModel().getSelectedItem();
+                try {
+                    ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("databases/hospital.dat"));
+                    out.writeObject(data);
+                } catch (IOException ex) {
+                }
+                Stage createAccount = (Stage) HospitalTable.getScene().getWindow();
+                Parent root = null;
+                try {
+                    root = FXMLLoader.load(getClass().getResource("Views/Hospital.fxml"));
+                } catch (IOException ex) {
+                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                Scene scene = new Scene(root);
+
+                createAccount.setTitle(data.getName());
+                scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+                createAccount.setScene(scene);
+                createAccount.centerOnScreen();
             }
         });
     }
 
+    /**
+     *
+     */
     @FXML
-    private void search(){
-        if(searchButton.getText().equals("Search")){
-            hospitalResults();
-            searchBox.editableProperty().set(false);
-            searchButton.setText("New Search");
-        }
-        else{
-            searchButton.setText("Search");
-            searchBox.editableProperty().set(true);
-            searchBox.setText("Search Zip Code");
-            populateList(hospitalData);
-        }
+    private void Locate() {
+        latBox.setText(Location.getLatitude());
+        longBox.setText(Location.getLongitude());
     }
-    private void hospitalResults() {
-        String zipCode = searchBox.getText();
-        System.out.println(zipCode);
-        Hospital temp = new Hospital();
-        temp.setZipCode(zipCode);
-        if (bst.Contains(temp)) {
-            try {
-                temp = bst.Get(temp);
-            } catch (EmptyException | NullElementException ex) {
-            }
-            ObservableList<Hospital> results = FXCollections.observableArrayList();
-            results.add(temp);
-            populateList(results);
-            searchButton.setText("New Search");
+
+    /**
+     *
+     */
+    @FXML
+    private void hospitalResults() throws EmptyException {
+        if (searchButton.getText().equals("Search")) {
+
         } else {
-            searchBox.setText("Hospital Not Found");
+            makeHeap();
+            Double r = radius.getValue();
+            ObservableList<Hospital> results = FXCollections.observableArrayList();
+            while (!heap.isEmpty()) {
+                Hospital h = heap.dequeue();
+                if (h.getDistance() <= r) {
+                    results.add(h);
+                }
+            }
+            populateList(results);
         }
     }
 
+    private void makeHeap() {
+        lat = Double.parseDouble(latBox.getText());
+        lon = Double.parseDouble(longBox.getText());
+        heap = new Heap<>();
+        bst.Reset();
+        Hospital.setCompareInt(6);
+        try {
+            while (!bst.isEmpty()) {
+                Hospital temp = bst.getNext();
+                temp.setDistance(lat, lon);
+                heap.enqueue(temp);
+            }
+        } catch (EmptyException ex) {
+        }
+    }
+
+    /**
+     *
+     */
     private void excelToBST() {
         try {
             excel = new ReadHospitalList();
@@ -152,6 +217,10 @@ public class HospitalListController implements Initializable {
         }
     }
 
+    /**
+     *
+     * @param temp
+     */
     private void populateList(ObservableList<Hospital> temp) {
         HospitalTable.setItems(temp);
         nameCol.setCellValueFactory(new PropertyValueFactory<>("Name"));
@@ -161,9 +230,10 @@ public class HospitalListController implements Initializable {
         zipCol.setCellValueFactory(new PropertyValueFactory<>("ZipCode"));
         latCol.setCellValueFactory(new PropertyValueFactory<>("Latitude"));
         longCol.setCellValueFactory(new PropertyValueFactory<>("Longitude"));
+        disCol.setCellValueFactory(new PropertyValueFactory<>("Distance"));
         phoneCol.setCellValueFactory(new PropertyValueFactory<>("Phone"));
         imageCol.setCellValueFactory(new PropertyValueFactory<>("Image"));
-        HospitalTable.getColumns().setAll(nameCol, addressCol, cityCol, stateCol, zipCol, latCol, longCol, phoneCol, imageCol);
+        HospitalTable.getColumns().setAll(nameCol, addressCol, cityCol, stateCol, zipCol, latCol, longCol, disCol, phoneCol, imageCol);
     }
 
     /*

@@ -15,32 +15,60 @@ public class BSTNode<E extends Comparable<E>> {
     private BSTNode<E> left;
     private BSTNode<E> right;
 
+    /**
+     *
+     * @param data
+     */
     public BSTNode(E data) {
         this.data = data;
         left = null;
         right = null;
     }
 
+    /**
+     *
+     * @return
+     */
     public E getData() {
         return data;
     }
 
+    /**
+     *
+     * @param data
+     */
     public void setData(E data) {
         this.data = data;
     }
 
+    /**
+     *
+     * @return
+     */
     public BSTNode<E> getLeft() {
         return left;
     }
 
+    /**
+     *
+     * @param left
+     */
     public void setLeft(BSTNode<E> left) {
         this.left = left;
     }
 
+    /**
+     *
+     * @return
+     */
     public BSTNode<E> getRight() {
         return right;
     }
 
+    /**
+     *
+     * @param right
+     */
     public void setRight(BSTNode<E> right) {
         this.right = right;
     }

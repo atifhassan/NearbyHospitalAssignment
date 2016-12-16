@@ -1,3 +1,9 @@
-#GridPane{
+.root{
     -fx-background-color:#191919;
+}
+.table-view{
+    -fx-background-color:#191919;
+}
+.label{
+     -fx-text-fill: darkgray;
 }

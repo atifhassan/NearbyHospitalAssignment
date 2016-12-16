@@ -23,6 +23,10 @@ public class ReadHospitalList {
     private List sheetData = new ArrayList();
     private FileInputStream fis;
 
+    /**
+     *
+     * @throws IOException
+     */
     public ReadHospitalList() throws IOException {
         try {
             //

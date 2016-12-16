@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+
+<HBox maxHeight="-Infinity" spacing="5"  maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"  prefHeight="400.0" prefWidth="800.0"
+      xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.HospitalController">
+    <children>
+        <ImageView fx:id="photo1" fitWidth="400" fitHeight="400"/>
+        <GridPane vgap="5" hgap="5" alignment="CENTER_LEFT">
+            <columnConstraints>
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints/>
+                <RowConstraints/>
+                <RowConstraints/>
+                <RowConstraints/>
+                <RowConstraints/>
+                <RowConstraints/>
+                <RowConstraints/>
+                <RowConstraints/>
+                <RowConstraints/>
+            </rowConstraints>
+            <children>
+                <HBox GridPane.rowIndex="0" spacing="5" >
+                    <children>
+                        <Label underline="true" text="Name:"/>
+                        <Label fx:id="name"/>
+                    </children>
+                </HBox>
+                <HBox GridPane.rowIndex="1" spacing="5">
+                    <children>
+                        <Label underline="true" text="Address:"/>
+                        <Label fx:id="address" />
+                    </children>
+                </HBox>
+                <HBox GridPane.rowIndex="2" spacing="5">
+                    <children>
+                        <Label underline="true" text="City:"/>
+                        <Label fx:id="city"/>
+                    </children>
+                </HBox>
+                <HBox GridPane.rowIndex="3" spacing="5">
+                    <children>
+                        <Label underline="true" text="State:"/>
+                        <Label fx:id="state"/>
+                    </children>
+                </HBox>
+                <HBox GridPane.rowIndex="4" spacing="5">
+                    <children>
+                        <Label underline="true" text="Zip Code:"/>
+                        <Label fx:id="zip"/>
+                    </children>
+                </HBox>
+                <HBox GridPane.rowIndex="5" spacing="5">
+                    <children>
+                        <Label underline="true" text="Latitude:"/>
+                        <Label fx:id="latitude" />
+                        <Label underline="true" text="Longitude:"/>
+                        <Label fx:id="longitude" />
+                    </children>
+                </HBox>
+                <HBox GridPane.rowIndex="6" spacing="5">
+                    <children>
+                        <Label underline="true" text="Distance:"/>
+                        <Label fx:id="distance"/>
+                    </children>
+                </HBox>
+                <HBox GridPane.rowIndex="7" spacing="5">
+                    <children>
+                        <Label underline="true" text="Phone Number:"/>
+                        <Label fx:id="phone" />
+                    </children>
+                </HBox>
+                <Button fx:id="backButton" GridPane.rowIndex="8" text="Back" onAction="#goBack"/> 
+            </children>
+        </GridPane>
+        
+    </children>
+</HBox>

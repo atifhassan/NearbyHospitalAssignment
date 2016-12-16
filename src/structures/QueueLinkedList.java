@@ -20,6 +20,9 @@ public class QueueLinkedList<E> implements Serializable, QueueUnboundedInterface
     private LinkedListNode<E> rear;    // reference to the rear of this queue
     private int size = 0;
 
+    /**
+     *
+     */
     public QueueLinkedList() {
         front = null;
         rear = null;

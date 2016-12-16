@@ -19,6 +19,7 @@ public class BinarySearchTree<E extends Comparable<E>> implements BSTInterface<E
     private BSTNode<E> root;//parent node
     private E found = null;   // used by remove
     private int size = 0;
+    private QueueLinkedList<E> order;
 
     /**
      *
@@ -195,17 +196,29 @@ public class BinarySearchTree<E extends Comparable<E>> implements BSTInterface<E
      */
     @Override
     public void Reset() {
-        size = 0;
-        root = null;
+        order = new QueueLinkedList<>();
+        Order(root);
     }
 
+    private void Order(BSTNode<E> tree) {
+        if (tree != null){
+            Order(tree.getLeft());
+            order.Enqueue(tree.getData());
+            Order(tree.getRight());
+        }
+    }
     /**
      *
-     * @return @throws EmptyException
+     * @return
+     * @throws Exceptions.EmptyException
      */
     @Override
     public E getNext() throws EmptyException {
-        return root.getRight().getData();
+        if (isEmpty()) {
+            return null;
+        } else {
+           return order.Dequeue();
+        }
     }
 
     @Override
